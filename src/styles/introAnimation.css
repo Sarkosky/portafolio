@@ -1,0 +1,26 @@
+/* animacion de THIS IS SARKOSKY */
+.thisIsSarkosky {
+  animation: sarkosky 1.5s ease-in;
+}
+
+@keyframes sarkosky {
+  0% {
+    opacity: 0;
+    transform: translateY(10vh);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-20vw, 0vh) scale();
+  }
+}
+
+/* barra de navegacion */
+.barraNavegacion {
+  text-transform: uppercase;
+  font-size: smaller;
+}
+
+.barraNavegacion a:hover {
+  transform: scale(1.2);
+}
