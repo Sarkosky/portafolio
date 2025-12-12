@@ -4,6 +4,10 @@ import LiquidGlass from "liquid-glass-react";
 import DecryptedText from "./components/DecryptedText";
 import TextType from "./components/TextType";
 import InfiniteMenu from "./components/InfiniteMenu"
+import NeonButton from "./components/NeonButton";
+import Modal from "./components/Modal";
+import DonationModal from "./components/DonationModal";
+
 
 function App() {
 
@@ -57,6 +61,20 @@ const items = [
   },
  
 ];
+
+
+// ventana modal about me
+const [open, setOpen] = useState(false);
+
+
+  //Modal de donaciones
+  const [donationOpen, setDonationOpen] = useState(false);
+  const [selectedDonation, setSelectedDonation] = useState(null);
+
+  const openDonation = (type) => {
+    setSelectedDonation(type);
+    setDonationOpen(true);
+  };
 
 
   return (
@@ -197,27 +215,76 @@ const items = [
       * 
       ***
       **/}
-      <section id="endGame" className={`endGame h-[35vh] bg-gray-900 flex items-center justify-center px-10 ${introActiva ? "opacity-0": "opacity-100"}`}>
+      <section id="endGame" className={`endGame h-[35vh] flex items-center justify-center px-10 ${introActiva ? "opacity-0": "opacity-100"}`}>
         <div className="w-full h-full grid grid-cols-3 gap-6">
 
           {/* IZQUIERDA */}
-          <div className="flex flex-col justify-center bg-gray-500 p-4">
-            Contactame zona izquierda
+          <div className="flex  justify-center items-center p-4">
+
+            <div className="">
+
+            <NeonButton 
+              label="Contact me!" 
+              onClick={() => setOpen(true)} 
+              />
+              </div>
+
+            <Modal isOpen={open} onClose={() => setOpen(false)} />
+            
           </div>
 
           {/* CENTRO */}
-          <div className="flex flex-col justify-center items-center bg-green-600 p-4">
+          <div className="flex flex-col justify-center items-center  p-4">
             <div>animación 3D mía</div>
             <div>tecnologías</div>
           </div>
 
           {/* DERECHA */}
-          <div className="flex flex-col justify-center bg-blue-600 p-4">
-            zona derecha — comprar un café / donación
+          <div className="flex flex-col justify-center items-center space-y-[1rem] bg-red-500">
+            <h2 className="font-bold text-xl">¿Me invitas algo?</h2>
+
+            <div className="flex p-2.5 justify-center bg-blue-400 w-full h-[50%] space-x-3">
+            <button
+              onClick={() => openDonation("cafe")}
+              className="w-full py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all hover:cursor-pointer"
+            >
+              ☕ Coffee
+            </button>
+
+
+            <button
+              onClick={() => openDonation("beer")}
+              className="w-full py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all hover:cursor-pointer"
+              >
+              🍺 Beer
+            </button>
+
+            <button
+              onClick={() => openDonation("weed")}
+              className="w-full py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all hover:cursor-pointer"
+              >
+              🍃 Weed
+            </button>
+
+              <DonationModal 
+                isOpen={donationOpen} 
+                onClose={() => setDonationOpen(false)} 
+                type={selectedDonation}
+                />
+                </div>
           </div>
 
         </div>
       </section>
+
+      {/* seccion de redes sociales */}
+
+      <div id="socialMedia" className={`m-4 flex items-center justify-center ${introActiva ? "opacity-0": "opacity-100"}`}>
+        <a href="" target="_blank">Linkedin</a>
+        <a href="" target="_blank">Instagram</a>
+        <a href="" target="_blank">Tiktok</a>
+        <a href="http://www.instagram.com" target="_blank">Git Hub</a>
+      </div>
 
       </div>
         </>
